@@ -3,6 +3,7 @@ const TableExpenses = ({ rows }) => (
     <>
         <div className="w-full">
             {
+
                 rows.map((row, index) => (
                     <div className={`flex flex-col px-1 py-4 ${index !== rows.length - 1 ? 'border-b border-zinc-700' : ''}`}
                         key={index}>

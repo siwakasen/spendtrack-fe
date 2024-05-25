@@ -22,7 +22,7 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
         }
         fetchCategories();
         setExpenseName("");
-        setCategory(categories[0]?._id)
+        setCategory(categories[0]?._id);
         setAmount(0);
         setDateOfExpense(dayjs().format('YYYY-MM-DD'));
     }, [open]);

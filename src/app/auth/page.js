@@ -1,11 +1,11 @@
 "use client"
+import { signIn } from 'next-auth/react';
 export default function AuthPage() {
     const text = "Feeling lost when it comes to keeping track of your expenses? Look no further! With just a few taps, you can effortlessly monitor your expenses, gaining clarity on where your money is it's going. Say goodbye to confusion and hello to financial empowerment!"
-    const handleLogin = async () => {
-        window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
+    const handleLogin = () => {
+        signIn("google", { callbackUrl: "/" });
     }
     return (
-
         <div className="flex flex-col items-center justify-center h-screen w-full bg-gray-900">
             <div className=" w-full h-full bg-black p-5 max-w-[512px]">
                 <div className="flex flex-col">

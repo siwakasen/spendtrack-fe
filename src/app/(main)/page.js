@@ -37,8 +37,6 @@ const Page = () => {
             }
         });
         setTotalExpenses(total);
-        setHighestExpense(highest);
-        setHighestDate(date);
 
     }, [expenses]);
 
