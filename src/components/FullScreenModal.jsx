@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 function FullScreenModal({ open, onClose, loading, setLoading }) {
     const [expenseName, setExpenseName] = useState("");
@@ -20,7 +19,6 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
             });
             const { data } = await res.json();
             setCategories(data);
-            console.log(data);
         }
         fetchCategories();
         setExpenseName("");
@@ -45,13 +43,8 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const expenseDate = dayjs(dateOfExpense);
-
-        // Get the current time
         const currentTime = dayjs();
-
-        // Format the expense date with the current time
         const formattedDateTime = `${expenseDate.format('YYYY-MM-DD')}T${currentTime.format('HH:mm:ss')}Z`;
-        console.log(formattedDateTime);
         const data = {
             expense_name: expenseName,
             amount: amount,
@@ -68,7 +61,6 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
             body: JSON.stringify(data),
         });
         const result = await res.json();
-        console.log(result);
         if (res.status === 201) {
             onClose();
         } else {

@@ -58,14 +58,14 @@ export default function Page() {
                 }
                 const { data } = await res.json();
                 setData(data);
-                console.log(data);
+
             } catch (error) {
                 console.error("Error fetching expenses:", error);
             }
         }
         async function unCategorizeData() {
             const currentMonth = dayjs().month() + 1;
-            console.log(currentMonth);
+
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expenses/month/${currentMonth}`, {
                     method: 'GET',
@@ -79,7 +79,7 @@ export default function Page() {
                 }
                 const { data } = await res.json();
                 setUnCategorizeData(data);
-                console.log(data);
+
             } catch (error) {
                 console.error("Error fetching expenses:", error);
             }
@@ -101,8 +101,6 @@ export default function Page() {
         let total = 0;
         let highest = 0;
         let highestExpense = [];
-        let mostEntry = [];
-        let entry = 0;
         data.forEach((expense) => {
             total += expense.total_expense;
             if (expense.total_expense > highest) {
@@ -110,16 +108,16 @@ export default function Page() {
                 highestExpense = expense;
             }
         });
-        console.log(total);
+
         setTotalExpenses(total);
         setHighestSpent(highestExpense);
-        console.log(highestExpense);
+
     }, [data]);
 
     useEffect(() => {
         let entry = 0;
         let mostEntry = [];
-        console.log(resultCategorized);
+
         resultCategorized.forEach((expense) => {
             if (expense.total > entry) {
                 entry = expense.total;
@@ -127,7 +125,7 @@ export default function Page() {
             }
         });
         setMostEntry(mostEntry);
-        console.log(mostEntry);
+
     }, [resultCategorized]);
 
 

@@ -4,17 +4,12 @@ import { useEffect, useState } from "react";
 import { Add } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import FullScreenModal from "@/components/FullScreenModal";
-import dayjs from "dayjs";
-
 const Page = () => {
     const [expenses, setExpenses] = useState([]);
     const [totalExpenses, setTotalExpenses] = useState(0);
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [highestExpense, setHighestExpense] = useState(0);
-    const [highestDate, setHighestDate] = useState("");
-
     useEffect(() => {
         async function fetchExpenses() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expenses`, {

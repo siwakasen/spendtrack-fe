@@ -33,7 +33,7 @@ export default function Chart({ data, listOfDates }) {
             }
         });
         setListOfExpenses(generatedExpenses);
-    }, [data, listOfDates]); // Update expenses only when data or listOfDates change
+    }, [data, listOfDates]);
 
     const chartData = {
         labels: listOfDates,
@@ -82,7 +82,7 @@ export default function Chart({ data, listOfDates }) {
                         return ctx.tick.value === 1000 ? "rgb(0,0,0)" : "rgb(107,114,128)";
                     },
                     callback: function (value, index, values) {
-                        return value === 0 ? '' : value.toLocaleString(); // Format ticks with comma separator
+                        return value === 0 ? '' : value.toLocaleString();
                     },
                 },
                 position: "right",
