@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react';
 export default function AuthPage() {
     const text = "Feeling lost when it comes to keeping track of your expenses? Look no further! With just a few taps, you can effortlessly monitor your expenses, gaining clarity on where your money is it's going. Say goodbye to confusion and hello to financial empowerment!"
     const handleLogin = () => {
-        signIn("google", { callbackUrl: "/" });
+        signIn("google");
     }
     return (
         <div className="flex flex-col items-center justify-center h-screen w-full bg-gray-900">

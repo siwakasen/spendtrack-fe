@@ -4,25 +4,30 @@ import { useEffect, useState } from "react";
 import { Add } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import FullScreenModal from "@/components/FullScreenModal";
+import { useSession, signOut } from 'next-auth/react'
+import { getSession } from 'next-auth/react';
 const Page = () => {
+    const { data: session } = getSession();
     const [expenses, setExpenses] = useState([]);
     const [totalExpenses, setTotalExpenses] = useState(0);
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        async function fetchExpenses() {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expenses`, {
-                method: 'GET',
-                headers: {
-                    'Access-Control-Allow-Origin': '${process.env.NEXT_PUBLIC_API_URL}',
-                },
-                credentials: 'include',
-            });
-            const { data } = await res.json();
-            setExpenses(data);
+        async function fetchData() {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expenses/${session.user.email}`, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+                const { data } = await res.json();
+                setExpenses(data);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
-        fetchExpenses();
+        fetchData();
     }, [loading]);
 
     useEffect(() => {
@@ -44,20 +49,7 @@ const Page = () => {
         document.cookie = `${name}=; Max-Age=0; path=/; domain=${window.location.hostname};`;
     }
     const handleLogout = async () => {
-        async function logout() {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
-                method: 'POST',
-                headers: {
-                    'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_API_URL}`,
-                },
-                credentials: 'include',
-            });
-            if (res.status === 200) {
-                deleteCookie('connect.sid')
-                router.push('/auth');
-            }
-        }
-        logout();
+        signOut();
     };
 
     function handleSummary() {
