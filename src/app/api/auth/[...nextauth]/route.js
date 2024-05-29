@@ -26,10 +26,10 @@ const authOptions = {
                         email: profile.email,
                         image: profile.picture,
                     };
-                    const response = await axios.post(
-                        "http://localhost:3001/api/auth/login",
-                        data
-                    );
+                    // const response = await axios.post(
+                    //     "http://localhost:3001/api/auth/login",
+                    //     data
+                    // );
 
                 } catch (error) {
                     console.error("Error during sign-in:", error);
