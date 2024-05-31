@@ -5,6 +5,7 @@ import { Add } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import FullScreenModal from "@/components/FullScreenModal";
 import { useSession, signOut } from 'next-auth/react';
+import { toast, Toaster } from "react-hot-toast";
 const Page = () => {
     const { data: session, status } = useSession();
     const [expenses, setExpenses] = useState([]);
@@ -60,8 +61,9 @@ const Page = () => {
         setOpen(!open);
     }
 
-
-
+    function handleAddPage() {
+        router.push('/expense/add');
+    }
 
     return (
         <>
@@ -116,7 +118,7 @@ const Page = () => {
                     </button>
                 </div>
                 <div className="flex justify-center items-center">
-                    <button onClick={() => handleOpen()} type="button" className="flex justify-center items-center rounded-full group">
+                    <button onClick={handleAddPage} type="button" className="flex justify-center items-center rounded-full group">
                         <div className="btn rounded-full p-2 bg-yellow-400">
                             <Add sx={{ width: '35px', height: '35px', color: "black" }} className="group-hover:scale-125 transition-all" />
                         </div>
@@ -124,7 +126,7 @@ const Page = () => {
                     <FullScreenModal open={open} onClose={handleOpen} loading={loading} setLoading={setLoading} />
                 </div>
                 <div className="flex justify-center items-center">
-                    <button onClick={() => handleLogout()} className="flex justify-center items-center flex-col text-gray-400 group">
+                    <button onClick={handleLogout} className="flex justify-center items-center flex-col text-gray-400 group">
                         <svg
                             stroke="currentColor"
                             fill="none"
@@ -144,6 +146,7 @@ const Page = () => {
                         Logout
                     </button>
                 </div>
+                <Toaster position="top-center" />
             </div>
         </>
     )

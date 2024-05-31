@@ -8,6 +8,7 @@ import CategorizedTable from "@/components/CategorizedTable";
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from "next/navigation";
 export default function Page() {
+    const [loadPage, setLoadPage] = useState(true);
     const { data: session, status } = useSession();
     const [data, setData] = useState([]);
     const [unCategorizeData, setUnCategorizeData] = useState([]);
@@ -56,7 +57,6 @@ export default function Page() {
                 });
                 const { data } = await res.json();
                 setData(data);
-
             } catch (error) {
                 console.error("Error fetching expenses:", error);
             }
@@ -91,7 +91,7 @@ export default function Page() {
             }
             setListOfDates(dates);
         }
-    }, []);
+    }, [session]);
 
     useEffect(() => {
         categorizeData(unCategorizeData);
@@ -122,7 +122,9 @@ export default function Page() {
             }
         });
         setMostEntry(mostEntry);
-
+        setTimeout(() => {
+            setLoadPage(false);
+        }, 300);
     }, [resultCategorized]);
 
 
@@ -170,7 +172,7 @@ export default function Page() {
                                     Highest spent
                                 </h1>
                                 <h1 className="text-sm text-slate-400">
-                                    {dayjs(highestSpent.date_of_expenses).format('dddd MMM DD YYYY')}
+                                    {!highestSpent.date_of_expenses ? '' : dayjs(highestSpent.date_of_expenses).format('dddd MMM DD YYYY')}
                                 </h1>
                             </div>
                         </div>
@@ -204,10 +206,10 @@ export default function Page() {
                             </div>
                             <div className=" flex flex-col items-start justify-center">
                                 <h1 className="text-bold text-md">
-                                    Highest spent
+                                    Most Entry
                                 </h1>
                                 <h1 className="text-sm text-slate-400">
-                                    {`${mostEntry.total} on ${mostEntry.icon} ${mostEntry.category_name}`}
+                                    {!mostEntry.total ? '' : `${mostEntry.total} on ${mostEntry.icon} ${mostEntry.category_name}`}
                                 </h1>
                             </div>
                         </div>

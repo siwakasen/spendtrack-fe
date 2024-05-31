@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSession } from 'next-auth/react';
-import { toast } from 'react-toastify';
-import Toast from "./Toast";
+import { toast, Toaster } from "react-hot-toast";
 import dayjs from "dayjs";
+import Picker from 'emoji-picker-react';
 function FullScreenModal({ open, onClose, loading, setLoading }) {
-    const { toastSuccess, toastError } = Toast();
     const { data: session, status } = useSession();
     const [expenseName, setExpenseName] = useState("");
     const [amount, setAmount] = useState(0);
     const [dateOfExpense, setDateOfExpense] = useState(dayjs().format('YYYY-MM-DD'));
     const [category, setCategory] = useState("");
     const [categories, setCategories] = useState([]);
+    const [chosenEmoji, setChosenEmoji] = useState(null);
+
 
     useEffect(() => {
 
@@ -47,6 +48,9 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
             setCategory(value);
         }
     }
+    const handleEmojiClick = (event, emojiObject) => {
+        setChosenEmoji(emojiObject);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -73,10 +77,10 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
         console.log(result);
         if (res.status === 201) {
             //toast success here
-            toastSuccess('Expense added successfully');
+            toast.success('Expense added successfully');
             onClose();
         } else {
-            //toast error here
+            toast.error('Error adding expense');
         }
         setLoading(!loading);
 
