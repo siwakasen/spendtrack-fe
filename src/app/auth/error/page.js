@@ -9,7 +9,7 @@ export default function AuthErrorPage() {
         //redirect after 2 secs
         const timer = setTimeout(() => {
             router.push('/auth');
-        }, 2000);
+        }, 1000);
     });
 
     return (

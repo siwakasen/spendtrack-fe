@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import Chart from "@/components/Chart";
 import dayjs from 'dayjs';
 import CategorizedTable from "@/components/CategorizedTable";
-
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from "next/navigation";
 export default function Page() {
+    const { data: session, status } = useSession();
     const [data, setData] = useState([]);
     const [unCategorizeData, setUnCategorizeData] = useState([]);
     const [resultCategorized, setResultCategorized] = useState([]);
@@ -49,13 +50,10 @@ export default function Page() {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expenses`, {
                     method: 'GET',
                     headers: {
-                        'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_API_URL}`,
+                        'Authorization': `Bearer ${session?.loggedUser}`
                     },
                     credentials: 'include',
                 });
-                if (!res.ok) {
-                    throw new Error('Failed to fetch expenses');
-                }
                 const { data } = await res.json();
                 setData(data);
 
@@ -70,13 +68,10 @@ export default function Page() {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expenses/month/${currentMonth}`, {
                     method: 'GET',
                     headers: {
-                        'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_API_URL}`,
+                        'Authorization': `Bearer ${session?.loggedUser}`
                     },
                     credentials: 'include',
                 });
-                if (!res.ok) {
-                    throw new Error('Failed to fetch expenses');
-                }
                 const { data } = await res.json();
                 setUnCategorizeData(data);
 
@@ -84,16 +79,18 @@ export default function Page() {
                 console.error("Error fetching expenses:", error);
             }
         }
-        fetchExpenses();
-        unCategorizeData();
+        if (session && session.user) {
+            fetchExpenses();
+            unCategorizeData();
 
-        const year = dayjs().year();
-        const month = dayjs().month();
-        const dates = [];
-        for (let i = 1; i <= dayjs(`${year}-${month + 1}-01`).daysInMonth(); i++) {
-            dates.push(dayjs(`${year}-${month + 1}-${i}`).format('MMM DD'));
+            const year = dayjs().year();
+            const month = dayjs().month();
+            const dates = [];
+            for (let i = 1; i <= dayjs(`${year}-${month + 1}-01`).daysInMonth(); i++) {
+                dates.push(dayjs(`${year}-${month + 1}-${i}`).format('MMM DD'));
+            }
+            setListOfDates(dates);
         }
-        setListOfDates(dates);
     }, []);
 
     useEffect(() => {
@@ -130,23 +127,10 @@ export default function Page() {
 
 
     const handleLogout = async () => {
-        async function logout() {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
-                method: 'POST',
-                headers: {
-                    'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_API_URL}`,
-                },
-                credentials: 'include',
-            });
-            if (res.status === 200) {
-                deleteCookie('connect.sid')
-                router.push('/auth');
-            }
-        }
-        logout();
+        signOut({ callbackUrl: '/' });
     };
     function handleDashboard() {
-        router.push('/');
+        router.push('/dashboard');
     }
 
     return (
@@ -193,7 +177,10 @@ export default function Page() {
                         <div className="flex items-center">
                             <h1 className="text-sm font-bold text-red-500 mr-1 pb-2">Rp.</h1>
                             <h2 className="text-sm font-bold text-red-500 mr-1 pb-1">-</h2>
-                            <h1 className="text-md font-bold text-center text-red-500">{Intl.NumberFormat("id-ID").format(highestSpent.total_expense)}</h1>
+                            <h1 className="text-md font-bold text-center text-red-500">
+                                {Intl.NumberFormat("id-ID").format(isNaN(highestSpent.total_expense) ? 0 : highestSpent.total_expense)}
+                            </h1>
+
                         </div>
                     </div>
                     <div className="w-full mt-5 rounded bg-slate-800 py-3 px-2 flex justify-between">
@@ -227,7 +214,9 @@ export default function Page() {
                         <div className="flex items-center">
                             <h1 className="text-sm font-bold text-red-500 mr-1 pb-2">Rp.</h1>
                             <h2 className="text-sm font-bold text-red-500 mr-1 pb-1">-</h2>
-                            <h1 className="text-md font-bold text-center text-red-500">{Intl.NumberFormat("id-ID").format(mostEntry.total_expense)}</h1>
+                            <h1 className="text-md font-bold text-center text-red-500">
+                                {Intl.NumberFormat("id-ID").format(isNaN(mostEntry.total_expense) ? 0 : mostEntry.total_expense)}
+                            </h1>
                         </div>
                     </div>
                     <div className="w-full pt-10">

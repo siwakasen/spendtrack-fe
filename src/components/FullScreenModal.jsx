@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
+import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
+import Toast from "./Toast";
 import dayjs from "dayjs";
 function FullScreenModal({ open, onClose, loading, setLoading }) {
+    const { toastSuccess, toastError } = Toast();
+    const { data: session, status } = useSession();
     const [expenseName, setExpenseName] = useState("");
     const [amount, setAmount] = useState(0);
     const [dateOfExpense, setDateOfExpense] = useState(dayjs().format('YYYY-MM-DD'));
@@ -13,18 +18,21 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
                 method: 'GET',
                 headers: {
-                    'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_API_URL}`,
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${session.loggedUser}`,
                 },
                 credentials: 'include',
             });
             const { data } = await res.json();
             setCategories(data);
+            setCategory(data[0]?._id);
         }
-        fetchCategories();
-        setExpenseName("");
-        setCategory(categories[0]?._id);
-        setAmount(0);
-        setDateOfExpense(dayjs().format('YYYY-MM-DD'));
+        if (session) {
+            fetchCategories();
+            setExpenseName("");
+            setAmount(0);
+            setDateOfExpense(dayjs().format('YYYY-MM-DD'));
+        }
     }, [open]);
 
     function handleInput(event) {
@@ -56,15 +64,19 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
             headers: {
                 'Access-Control-Allow-Origin': `${process.env.NEXT_PUBLIC_API_URL}`,
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${session.loggedUser}`,
             },
             credentials: 'include',
             body: JSON.stringify(data),
         });
         const result = await res.json();
+        console.log(result);
         if (res.status === 201) {
+            //toast success here
+            toastSuccess('Expense added successfully');
             onClose();
         } else {
-            alert("Failed to save expense");
+            //toast error here
         }
         setLoading(!loading);
 

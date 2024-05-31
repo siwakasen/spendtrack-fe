@@ -1,8 +1,6 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
-import axios from "axios";
 import SignToken from "./SignToken";
-
 const authOptions = {
     secret: process.env.NEXT_PUBLIC_JWT_SECRET_KEY,
     providers: [
@@ -13,24 +11,26 @@ const authOptions = {
         }),
     ],
     pages: {
-        signIn: '/',
-        signOut: '/auth',
+        signIn: '/dashboard',
+        signOut: '/',
         error: '/auth/error',
     },
     callbacks: {
         async signIn({ account, profile, email, credentials }) {
-            if (account.provider === "google") {
+            if (account.provider === "google" && profile.email_verified) {
                 try {
                     const data = {
                         name: profile.name,
                         email: profile.email,
                         image: profile.picture,
                     };
-                    // const response = await axios.post(
-                    //     "http://localhost:3001/api/auth/login",
-                    //     data
-                    // );
-
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
                 } catch (error) {
                     console.error("Error during sign-in:", error);
                     return false;
@@ -38,10 +38,14 @@ const authOptions = {
             }
             return true;
         },
-        async jwt({ token, user }) {
-            if (user) {
-                token.loggedUser = SignToken(user?.email);
+        async jwt({ account, token, user }) {
+            if (account?.user) {
+                token.user = account.user;
+            } else if (user) {
+                token.user = user;
             }
+            console.log(token.user);
+            token.loggedUser = await SignToken(token.user?.email);
             return token;
         },
         async session({ session, token }) {
