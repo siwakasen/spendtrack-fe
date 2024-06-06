@@ -1,15 +1,33 @@
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
 
+    if (date.toDateString() === today.toDateString()) {
+        return 'Today';
+    } else if (date.toDateString() === yesterday.toDateString()) {
+        return 'Yesterday';
+    } else {
+        return new Intl.DateTimeFormat('id-ID', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        }).format(date);
+    }
+};
 const TableExpenses = ({ rows }) => (
     <>
         <div className="w-full">
             {
 
                 rows.map((row, index) => (
+
                     <div className={`flex flex-col px-1 py-4 ${index !== rows.length - 1 ? 'border-b border-zinc-700' : ''}`}
                         key={index}>
                         <div className="flex items-center justify-between pb-2">
                             <h1 className="text-lg text-gray-400">
-                                {row.date_of_expenses}
+                                {formatDate(row.date_of_expenses)}
                             </h1>
                             <h1 className="text-lg text-gray-400">
                                 Rp. -

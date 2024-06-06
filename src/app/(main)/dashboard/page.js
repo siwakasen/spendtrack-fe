@@ -118,7 +118,7 @@ const Page = () => {
                     </button>
                 </div>
                 <div className="flex justify-center items-center">
-                    <button onClick={handleAddPage} type="button" className="flex justify-center items-center rounded-full group">
+                    <button onClick={handleOpen} type="button" className="flex justify-center items-center rounded-full group">
                         <div className="btn rounded-full p-2 bg-yellow-400">
                             <Add sx={{ width: '35px', height: '35px', color: "black" }} className="group-hover:scale-125 transition-all" />
                         </div>

@@ -138,8 +138,10 @@ export default function Page() {
     return (
         <>
             <div className="flex flex-col items-center  w-full h-full min-h-screen bg-black p-6 max-w-[512px]">
-                <h1 className="text-2xl font-bold text-white mt-5">Summary</h1>
-                <div className="flex max-w-[512px] w-full justify-start pt-20">
+                <div>
+                    <h1 className="text-2xl font-bold text-white mt-24">Summary</h1>
+                </div>
+                <div className="flex max-w-[512px] w-full justify-start pt-10">
                     <h1 className="text-xl font-bold text-red-500 mr-2">Rp.</h1>
                     <h2 className="text-xl font-bold text-red-500 mr-1">-</h2>
                     <h1 className="text-4xl font-bold text-center text-red-500">{Intl.NumberFormat("id-ID").format(totalExpenses)}</h1>

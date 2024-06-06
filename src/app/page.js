@@ -1,26 +1,29 @@
 "use client"
 import { signIn } from 'next-auth/react';
+import Image from 'next/image';
+import Phone from '@/assets/images/mobile.png';
+
 export default function AuthPage() {
-    const text = "Feeling lost when it comes to keeping track of your expenses? Look no further! With just a few taps, you can effortlessly monitor your expenses, gaining clarity on where your money is going. Say goodbye to confusion and hello to financial empowerment!";
+    const text = "Struggling to keep an eye on your expenses? Paybox make it easy! With just a few taps, you can monitor your expense and analyze your spending habits in real-time.";
 
     const handleLogin = () => {
         signIn("google", { callbackUrl: "/dashboard" });
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen w-full bg-gray-900">
-            <div className="w-full h-full bg-black p-5 max-w-[512px]">
-                <div className="flex flex-col">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r text-transparent from-sky-300 via-indigo-400 to-teal-500 bg-clip-text pt-5">Cashtrack</h1>
-                    <div className="pt-10 pb-5">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
+            <div className="w-full bg-black p-5 max-w-[512px] flex flex-col h-screen">
+                <div className="flex flex-col flex-grow">
+                    <h1 className="typing-text text-4xl font-bold bg-gradient-to-r text-transparent from-sky-300 via-indigo-400 to-teal-500 bg-clip-text pt-10">PAYBOX</h1>
+                    <div className="pb-5">
                         <h2 className="text-3xl font-semibold bg-gradient-to-r from-slate-500 to-indigo-300 bg-clip-text text-transparent">
-                            Track your cashflow and analyze expenses at all times
+                            Take a notes on your expenses with a few taps!
                         </h2>
-                        <p className="py-6 text-slate-400">
+                        <p className="py-8 text-slate-400">
                             {text}
                         </p>
                     </div>
-                    <div className='mt-3'>
+                    <div className='mt-1'>
                         <button
                             onClick={handleLogin}
                             className="mx-auto w-full hover:ring-2 ring-1 py-2 rounded-sm ring-zinc-600 flex items-center gap-3 px-4 group transition-all">
@@ -45,7 +48,9 @@ export default function AuthPage() {
                             <span className="flex-1 group-hover:tracking-wider transition-all text-white text-center justify-center">Login to Continue</span>
                         </button>
                     </div>
-
+                    <div className='pt-10  flex justify-center items-center '>
+                        <Image src={Phone} alt="paybox" className="" />
+                    </div>
                 </div>
             </div>
         </div >
