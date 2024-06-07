@@ -12,7 +12,7 @@ export default function AuthPage() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
-            <div className="w-full bg-black p-5 max-w-[512px] flex flex-col h-screen">
+            <div className="w-full bg-black p-5 max-w-[512px] flex flex-col min-h-screen max-h-[130vh] overflow-hidden">
                 <div className="flex flex-col flex-grow">
                     <h1 className="typing-text text-4xl pt-5 font-bold bg-gradient-to-r text-transparent from-sky-300 via-indigo-400 to-teal-500 bg-clip-text">Spendtrack</h1>
                     <div >
@@ -48,8 +48,8 @@ export default function AuthPage() {
                             <span className="flex-1 group-hover:tracking-wider transition-all text-white text-center justify-center">Login to Continue</span>
                         </button>
                     </div>
-                    <div className='pt-6  flex justify-center items-center '>
-                        <Image src={Phone} alt="paybox" className="" />
+                    <div className='pt-8  flex justify-center items-center'>
+                        <Image src={Phone} alt="paybox" className=" object-contain px-10" />
                     </div>
                 </div>
             </div>
