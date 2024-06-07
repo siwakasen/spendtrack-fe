@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Phone from '@/assets/images/mobile.png';
 
 export default function AuthPage() {
-    const text = "Struggling to keep an eye on your expenses? Paybox make it easy! With just a few taps, you can monitor your expense and analyze your spending habits in real-time.";
+    const text = "Struggling to keep an eye on your expenses? Spendtrack make it easy! With just a few taps, you can monitor your expense and analyze your spending habits in real-time.";
 
     const handleLogin = () => {
         signIn("google", { callbackUrl: "/dashboard" });
