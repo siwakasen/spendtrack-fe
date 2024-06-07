@@ -139,7 +139,7 @@ export default function Page() {
         <>
             <div className="flex flex-col items-center  w-full h-full min-h-screen bg-black p-6 max-w-[512px]">
                 <div>
-                    <h1 className="text-2xl font-bold text-white mt-24">Summary</h1>
+                    <h1 className="text-2xl font-bold text-white mt-10">Summary</h1>
                 </div>
                 <div className="flex max-w-[512px] w-full justify-start pt-10">
                     <h1 className="text-xl font-bold text-red-500 mr-2">Rp.</h1>
