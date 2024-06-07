@@ -14,12 +14,12 @@ export default function AuthPage() {
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
             <div className="w-full bg-black p-5 max-w-[512px] flex flex-col h-screen">
                 <div className="flex flex-col flex-grow">
-                    <h1 className="typing-text text-4xl font-bold bg-gradient-to-r text-transparent from-sky-300 via-indigo-400 to-teal-500 bg-clip-text pt-10">PAYBOX</h1>
-                    <div className="pb-5">
+                    <h1 className="typing-text text-4xl pt-5 font-bold bg-gradient-to-r text-transparent from-sky-300 via-indigo-400 to-teal-500 bg-clip-text">Spendtrack</h1>
+                    <div >
                         <h2 className="text-3xl font-semibold bg-gradient-to-r from-slate-500 to-indigo-300 bg-clip-text text-transparent">
                             Take a notes on your expenses with a few taps!
                         </h2>
-                        <p className="py-8 text-slate-400">
+                        <p className="py-6 text-slate-400">
                             {text}
                         </p>
                     </div>
@@ -48,7 +48,7 @@ export default function AuthPage() {
                             <span className="flex-1 group-hover:tracking-wider transition-all text-white text-center justify-center">Login to Continue</span>
                         </button>
                     </div>
-                    <div className='pt-10  flex justify-center items-center '>
+                    <div className='pt-6  flex justify-center items-center '>
                         <Image src={Phone} alt="paybox" className="" />
                     </div>
                 </div>

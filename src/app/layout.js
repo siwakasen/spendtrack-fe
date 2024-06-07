@@ -4,8 +4,8 @@ import { NextAuthProvider } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Cashtrack",
-  description: "track your cashflow with ease",
+  title: "Spendtrack",
+  description: "track your expense easily",
 };
 
 export default function RootLayout({ children }) {
