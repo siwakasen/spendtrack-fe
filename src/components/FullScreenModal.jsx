@@ -97,19 +97,19 @@ function FullScreenModal({ open, onClose, loading, setLoading }) {
                 <h1 className="text-2xl p-4 font-extrabold">Input your expense here</h1>
                 <form onSubmit={handleSubmit} className="max-w-full w-full">
                     <div className="mb-6">
-                        <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                        <label htmlFor="text" className="block mb-2 text-sm font-medium  text-white">Name</label>
                         <input type="text" name="expense_name" value={expenseName} onChange={(e) => handleInput(e)} id="expense_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type your expense name" required />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                        <label htmlFor="amount" className="block mb-2 text-sm font-medium  text-white">Amount</label>
                         <input type="number" name="amount" id="amount" min={1} value={amount} onChange={(e) => handleInput(e)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Expense amount" required />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="date_of_expense" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense Date</label>
+                        <label htmlFor="date_of_expense" className="block mb-2 text-sm font-medium  text-white">Expense Date</label>
                         <input type="date" name="date_of_expense" id="date_of_expense" value={dateOfExpense} onChange={(e) => handleInput(e)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                        <label htmlFor="category" className="block mb-2 text-sm font-medium  text-white">Category</label>
                         <select name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             onChange={(e) => handleInput(e)}
                         >
