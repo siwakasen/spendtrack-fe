@@ -109,7 +109,7 @@ export default function Page() {
         setTotalExpenses(total);
         setHighestSpent(highestExpense);
 
-    }, [data]);
+    }, [data, unCategorizeData]);
 
     useEffect(() => {
         let entry = 0;
