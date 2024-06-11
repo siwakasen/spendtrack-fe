@@ -76,9 +76,9 @@ const Page = () => {
                         </p>
                         <div className="flex max-w-[512px] w-full justify-center ">
                             <h1 className="text-2xl font-bold text-red-500 mr-2">Rp.</h1>
-                            <h2 className="text-2xl font-bold text-red-500 mr-1">-</h2>
-                            <h1 className="text-5xl font-bold text-center text-red-500">{Intl.NumberFormat("id-ID").format(totalExpenses)}</h1>
-                            <h1 className="text-xl font-bold text-center text-red-500">.00</h1>
+                            <h2 className="text-3xl font-bold text-red-500 mr-1">-</h2>
+                            <h1 className="text-4xl font-bold text-center text-red-500">{Intl.NumberFormat("id-ID").format(totalExpenses)}</h1>
+                            <h1 className="text-xl font-bold text-center text-red-500"></h1>
                         </div>
                     </div>
                     <div className="w-full mt-40">
@@ -90,7 +90,7 @@ const Page = () => {
                 </div>
             </div >
             {/* Navigation bar */}
-            <div className="w-full max-w-[512px] h-24 fixed bottom-0 grid grid-cols-3 bg-black border-t border-zinc-600">
+            <div className="w-full max-w-[512px] h-20 fixed bottom-0 grid grid-cols-3 bg-black border-t border-zinc-600">
                 <div className="flex justify-center items-center ">
                     <button onClick={handleSummary} className="flex justify-center items-center flex-col text-gray-400 group">
                         <svg
@@ -99,7 +99,7 @@ const Page = () => {
                             strokeWidth="1.5"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
-                            className="h-7 w-7 group-hover:scale-125 transition-all"
+                            className="h-5 w-5 group-hover:scale-125 transition-all"
                             height="1em"
                             width="1em"
                             xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@ const Page = () => {
                 <div className="flex justify-center items-center">
                     <button onClick={handleOpen} type="button" className="flex justify-center items-center rounded-full group">
                         <div className="btn rounded-full p-2 bg-yellow-400">
-                            <Add sx={{ width: '35px', height: '35px', color: "black" }} className="group-hover:scale-125 transition-all" />
+                            <Add sx={{ width: '25px', height: '25px', color: "black" }} className="group-hover:scale-125 transition-all" />
                         </div>
                     </button>
                     <FullScreenModal open={open} onClose={handleOpen} loading={loading} setLoading={setLoading} />
@@ -133,7 +133,7 @@ const Page = () => {
                             strokeWidth="1.5"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
-                            className="h-7 w-7 group-hover:scale-125 transition-all"
+                            className="h-5 w-5 group-hover:scale-125 transition-all"
                             height="1em"
                             width="1em"
                             xmlns="http://www.w3.org/2000/svg">

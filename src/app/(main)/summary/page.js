@@ -228,7 +228,7 @@ export default function Page() {
                     </div>
                 </div>
             </div >
-            <div className="w-full max-w-[512px] h-24 fixed bottom-0 grid grid-cols-3 bg-black border-t border-zinc-600">
+            <div className="w-full max-w-[512px] h-20 fixed bottom-0 grid grid-cols-3 bg-black border-t border-zinc-600">
                 <div className="flex justify-center items-center ">
                     <button className={`flex justify-center items-center flex-col  group ${pathname === '/summary' ? 'text-white' : 'text-gray-4000'}`}>
                         <svg
@@ -237,7 +237,7 @@ export default function Page() {
                             strokeWidth="1.5"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
-                            className="h-7 w-7 group-hover:scale-125 transition-all"
+                            className="h-5 w-5 group-hover:scale-125 transition-all"
                             height="1em"
                             width="1em"
                             xmlns="http://www.w3.org/2000/svg">
@@ -258,7 +258,7 @@ export default function Page() {
                 <div className="flex justify-center items-center">
                     <button onClick={handleDashboard} type="button" className="flex justify-center items-center rounded-full group">
                         <div className="btn rounded-full p-2 bg-yellow-400">
-                            <Add sx={{ width: '35px', height: '35px', color: "black" }} className="group-hover:scale-125 transition-all" />
+                            <Add sx={{ width: '25px', height: '25px', color: "black" }} className="group-hover:scale-125 transition-all" />
                         </div>
                     </button>
                 </div>
@@ -270,7 +270,7 @@ export default function Page() {
                             strokeWidth="1.5"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
-                            className="h-7 w-7 group-hover:scale-125 transition-all"
+                            className="h-5 w-5 group-hover:scale-125 transition-all"
                             height="1em"
                             width="1em"
                             xmlns="http://www.w3.org/2000/svg">
