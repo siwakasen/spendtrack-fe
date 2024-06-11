@@ -78,7 +78,6 @@ const Page = () => {
                             <h1 className="text-2xl font-bold text-red-500 mr-2">Rp.</h1>
                             <h2 className="text-3xl font-bold text-red-500 mr-1">-</h2>
                             <h1 className="text-4xl font-bold text-center text-red-500">{Intl.NumberFormat("id-ID").format(totalExpenses)}</h1>
-                            <h1 className="text-xl font-bold text-center text-red-500"></h1>
                         </div>
                     </div>
                     <div className="w-full mt-40">
